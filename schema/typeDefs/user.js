@@ -2,31 +2,39 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
     enum Role {
-        SHIPPER
-        CARRIER
-        ADMIN
+        shipper
+        carrier
+        admin
     }
 
     type Query {
-        users: [User]
+        me: User
+    }
+
+    type Mutation {
+        signup(email: String!, password: String!, role: Role!): User
+        login(email: String!, password: String!): Auth
+    }
+
+    type Auth {
+        token: String
     }
 
     type User {
-        id: ID!
-        email: String!
-        password: String!
-        role: Role!
+        id: ID
+        email: String
+        role: Role
     }
 
     type Shipper {
-        id: ID!
-        userId: ID!
-        firstName: String!
-        lastName: String!
+        id: ID
+        userId: ID
+        firstName: String
+        lastName: String
     }
 
     type Carrier {
-        userId: ID!
-        companyName: String!
+        userId: ID
+        companyName: String
     }
 `;
