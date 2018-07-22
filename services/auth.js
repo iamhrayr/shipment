@@ -16,24 +16,21 @@ const login = ({email, password, models}) => {
     });
 };
 
-
 const signup = ({email, password, role, models}) => {
-    return new models.User({email, password, role})
-        .save()
-        .then(createdUser => {
-            switch (createdUser.role) {
-                case 'shipper':
-                    new models.Shipper({
-                        userId: createdUser._id
-                    }).save();
-                    break;
-                case 'carrier':
-                    new models.Carrier({
-                        userId: createdUser._id
-                    }).save();
-                    break;
-            }
-        });
+    switch (role) {
+        case 'carrier':
+            return new models.Carrier({
+                role: 'carrier',
+                email,
+                password,
+            }).save();
+        case 'shipper':
+            return new models.Shipper({
+                role: 'shipper',
+                email,
+                password,
+            }).save();
+    }
 }
 
 

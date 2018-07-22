@@ -7,10 +7,11 @@ const UserSchema = new Schema({
     password: String,
     role: {
         type: String,
-        enum: ['shipper', 'carrier', 'admin']
-
+        enum: ['shipper', 'carrier']
     },
-}, { timestampes: true });
+}, { 
+    timestampes: true 
+});
 
 UserSchema.pre('save', function(next) {
     const SALT_WORK_FACTOR = 5;

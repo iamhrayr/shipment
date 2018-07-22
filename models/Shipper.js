@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./User');
 
-const ShipperSchema = new Schema({
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    firstName: String,
-    lastName: String
-});
+const Shipper = User.discriminator(
+    'shipper',
+    new Schema({
+        firstName: String,
+        lastName: String,
+        phone: String,
+    }, {
+        discriminatorKey: 'role'
+    })
+);
 
-module.exports = mongoose.model('Shipper', ShipperSchema);
+module.exports = Shipper;
+

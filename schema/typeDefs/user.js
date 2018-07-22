@@ -20,21 +20,26 @@ module.exports = gql`
         token: String
     }
 
-    type User {
+    interface User {
         id: ID
         email: String
         role: Role
     }
 
-    type Shipper {
+    type Shipper implements User {
         id: ID
-        userId: ID
+        email: String
+        role: Role
         firstName: String
         lastName: String
+        phone: String
     }
 
-    type Carrier {
-        userId: ID
+    type Carrier implements User {
+        id: ID
+        email: String
+        role: Role
         companyName: String
+        phone: String
     }
 `;
