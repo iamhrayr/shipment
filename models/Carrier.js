@@ -7,6 +7,9 @@ const Carrier = User.discriminator(
     new Schema({
         companyName: String,
         phone: String,
+        website: String,
+        country: String,
+        city: String,
     }, {
         discriminatorKey: 'role'
     })
