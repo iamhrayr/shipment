@@ -10,6 +10,9 @@ module.exports = {
     },
     Query: {
         me: (root, args, { user, models }) => {
+            if (!user) {
+                throw 'Authentication Error';
+            }
             return user;
         },
     },
